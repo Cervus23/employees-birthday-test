@@ -5,6 +5,7 @@ import { setEmployeesList } from '../../store/actions'
 import './style.css'
 
 const EmployeesList = ({ employeesList, setEmployeesList }) => {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   useEffect(() => {
     if (employeesList.length === 0) {
       ;(async () => {
@@ -16,14 +17,44 @@ const EmployeesList = ({ employeesList, setEmployeesList }) => {
     }
   }, [setEmployeesList, employeesList])
 
+  // {
+  //   list
+  //     .filter((item) => item.lastName[0] === letter)
+  //     .map((item) => (
+  //       <div key={item.id}>
+  //         {item.lastName} {item.firstName}
+  //       </div>
+  //     ))
+  // }
+
+  const groupEmployeesList = (list, letter) => {
+    return (
+      <div key={letter} className="letterGroup">
+        {letter}
+        <div className="employeesGroup">
+          {list.filter((item) => item.lastName[0] === letter).length ? (
+            list
+              .filter((item) => item.lastName[0] === letter)
+              .map((item) => (
+                <div key={item.id} className="employee">
+                  {item.lastName} {item.firstName}
+                  <input type="checkbox"></input>
+                </div>
+              ))
+          ) : (
+            <div className="employee">----</div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div>
+    <div className="employeesContainer">
       {employeesList.length &&
-        employeesList.map((item) => (
-          <div key={item.id}>
-            {item.lastName} {item.firstName}
-          </div>
-        ))}
+        alphabet.map((item, index) =>
+          groupEmployeesList(employeesList, item, index)
+        )}
     </div>
   )
 }
