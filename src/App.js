@@ -1,7 +1,8 @@
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './store/reducers'
-import EmployeesList from './components/employeesList/index'
+import EmployeesList from './containers/employeesList/index'
+import EmployeesBirthday from './containers/employeesBirthday'
 import './App.css'
 
 const store = createStore(reducers)
@@ -11,6 +12,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <EmployeesList />
+        <EmployeesBirthday />
       </div>
     </Provider>
   )

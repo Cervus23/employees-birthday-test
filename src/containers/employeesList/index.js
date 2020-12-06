@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { setEmployeesList } from '../../store/actions'
+import {
+  setEmployeesList,
+  selectEmployee,
+  deselectEmployee,
+} from '../../store/actions'
 import './style.css'
 
-const EmployeesList = ({ employeesList, setEmployeesList }) => {
+const EmployeesList = ({
+  employeesList,
+  setEmployeesList,
+  selectEmployee,
+  deselectEmployee,
+}) => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   useEffect(() => {
     if (employeesList.length === 0) {
@@ -17,28 +26,28 @@ const EmployeesList = ({ employeesList, setEmployeesList }) => {
     }
   }, [setEmployeesList, employeesList])
 
-  // {
-  //   list
-  //     .filter((item) => item.lastName[0] === letter)
-  //     .map((item) => (
-  //       <div key={item.id}>
-  //         {item.lastName} {item.firstName}
-  //       </div>
-  //     ))
-  // }
+  const onChangeHandler = (employee, event) => {
+    return event.target.checked
+      ? selectEmployee(employee)
+      : deselectEmployee(employee)
+  }
 
   const groupEmployeesList = (list, letter) => {
     return (
-      <div key={letter} className="letterGroup">
+      <div key={letter} className="letter-group">
         {letter}
-        <div className="employeesGroup">
+        <div className="employees-group">
           {list.filter((item) => item.lastName[0] === letter).length ? (
             list
               .filter((item) => item.lastName[0] === letter)
               .map((item) => (
                 <div key={item.id} className="employee">
                   {item.lastName} {item.firstName}
-                  <input type="checkbox"></input>
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    onChange={(event) => onChangeHandler(item, event)}
+                  ></input>
                 </div>
               ))
           ) : (
@@ -50,24 +59,34 @@ const EmployeesList = ({ employeesList, setEmployeesList }) => {
   }
 
   return (
-    <div className="employeesContainer">
-      {employeesList.length &&
-        alphabet.map((item, index) =>
-          groupEmployeesList(employeesList, item, index)
-        )}
+    <div className="employees">
+      <div className="header">Employees</div>
+      <div className="employees-container">
+        {employeesList.length &&
+          alphabet.map((item, index) =>
+            groupEmployeesList(employeesList, item, index)
+          )}
+      </div>
     </div>
   )
 }
 
-const mapStateToProps = ({ employeesList }) => {
+const mapStateToProps = ({ employeesList, selectedEmployees }) => {
   return {
     employeesList,
+    selectedEmployees,
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   setEmployeesList: (employeesList) => {
     dispatch(setEmployeesList(employeesList))
+  },
+  selectEmployee: (employee) => {
+    dispatch(selectEmployee(employee))
+  },
+  deselectEmployee: (employee) => {
+    dispatch(deselectEmployee(employee))
   },
 })
 
