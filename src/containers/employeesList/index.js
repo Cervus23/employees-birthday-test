@@ -10,6 +10,7 @@ import styles from './style.module.css'
 
 const EmployeesList = ({
   employeesList,
+  selectedEmployees,
   setEmployeesList,
   selectEmployee,
   deselectEmployee,
@@ -36,21 +37,25 @@ const EmployeesList = ({
     const groupedList = [
       ...list
         .sort((a, b) => (a.lastName > b.lastName ? 1 : -1))
-        .filter((item) => item.lastName[0] === letter),
+        .filter((employee) => employee.lastName[0] === letter),
     ]
     return (
       <div key={letter} className={styles.letterGroup}>
         <div className={styles.letter}>{letter}</div>
         <div className={styles.employeesGroup}>
           {groupedList.length ? (
-            groupedList.map((item) => (
-              <div key={item.id} className={styles.employee}>
-                {item.lastName} {item.firstName}
+            groupedList.map((employee) => (
+              <div key={employee.id} className={styles.employee}>
+                {employee.lastName} {employee.firstName}
                 <input
                   type="checkbox"
+                  checked={selectedEmployees.reduce((acc, item) => {
+                    if (item.id === employee.id) acc += 1
+                    return acc
+                  }, 0)}
                   className={styles.checkbox}
-                  onChange={(event) => onChangeHandler(item, event)}
-                ></input>
+                  onChange={(event) => onChangeHandler(employee, event)}
+                />
               </div>
             ))
           ) : (
@@ -60,7 +65,6 @@ const EmployeesList = ({
       </div>
     )
   }
-
   return (
     <div className={styles.main}>
       <div className={styles.header}>Employees</div>
