@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/employees-birthday-test/static/css/main.42e7307f.chunk.css",
+    "main.js": "/employees-birthday-test/static/js/main.c8afa82b.chunk.js",
+    "main.js.map": "/employees-birthday-test/static/js/main.c8afa82b.chunk.js.map",
+    "runtime-main.js": "/employees-birthday-test/static/js/runtime-main.8a9d4c8f.js",
+    "runtime-main.js.map": "/employees-birthday-test/static/js/runtime-main.8a9d4c8f.js.map",
+    "static/js/2.02053f2e.chunk.js": "/employees-birthday-test/static/js/2.02053f2e.chunk.js",
+    "static/js/2.02053f2e.chunk.js.map": "/employees-birthday-test/static/js/2.02053f2e.chunk.js.map",
+    "static/js/3.cc03b490.chunk.js": "/employees-birthday-test/static/js/3.cc03b490.chunk.js",
+    "static/js/3.cc03b490.chunk.js.map": "/employees-birthday-test/static/js/3.cc03b490.chunk.js.map",
+    "index.html": "/employees-birthday-test/index.html",
+    "static/css/main.42e7307f.chunk.css.map": "/employees-birthday-test/static/css/main.42e7307f.chunk.css.map",
+    "static/js/2.02053f2e.chunk.js.LICENSE.txt": "/employees-birthday-test/static/js/2.02053f2e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8a9d4c8f.js",
+    "static/js/2.02053f2e.chunk.js",
+    "static/css/main.42e7307f.chunk.css",
+    "static/js/main.c8afa82b.chunk.js"
+  ]
+}
