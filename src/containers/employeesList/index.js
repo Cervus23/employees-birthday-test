@@ -6,7 +6,7 @@ import {
   selectEmployee,
   deselectEmployee,
 } from '../../store/actions'
-import './style.css'
+import styles from './style.module.css'
 
 const EmployeesList = ({
   employeesList,
@@ -33,25 +33,28 @@ const EmployeesList = ({
   }
 
   const groupEmployeesList = (list, letter) => {
+    const groupedList = [
+      ...list
+        .sort((a, b) => (a.lastName > b.lastName ? 1 : -1))
+        .filter((item) => item.lastName[0] === letter),
+    ]
     return (
-      <div key={letter} className="letter-group">
-        {letter}
-        <div className="employees-group">
-          {list.filter((item) => item.lastName[0] === letter).length ? (
-            list
-              .filter((item) => item.lastName[0] === letter)
-              .map((item) => (
-                <div key={item.id} className="employee">
-                  {item.lastName} {item.firstName}
-                  <input
-                    type="checkbox"
-                    className="checkbox"
-                    onChange={(event) => onChangeHandler(item, event)}
-                  ></input>
-                </div>
-              ))
+      <div key={letter} className={styles.letterGroup}>
+        <div className={styles.letter}>{letter}</div>
+        <div className={styles.employeesGroup}>
+          {groupedList.length ? (
+            groupedList.map((item) => (
+              <div key={item.id} className={styles.employee}>
+                {item.lastName} {item.firstName}
+                <input
+                  type="checkbox"
+                  className={styles.checkbox}
+                  onChange={(event) => onChangeHandler(item, event)}
+                ></input>
+              </div>
+            ))
           ) : (
-            <div className="employee">----</div>
+            <div className={styles.employee}>----</div>
           )}
         </div>
       </div>
@@ -59,13 +62,12 @@ const EmployeesList = ({
   }
 
   return (
-    <div className="employees">
-      <div className="header">Employees</div>
-      <div className="employees-container">
-        {employeesList.length &&
-          alphabet.map((item, index) =>
-            groupEmployeesList(employeesList, item, index)
-          )}
+    <div className={styles.main}>
+      <div className={styles.header}>Employees</div>
+      <div className={styles.employeesContainer}>
+        {employeesList.length
+          ? alphabet.map((letter) => groupEmployeesList(employeesList, letter))
+          : null}
       </div>
     </div>
   )

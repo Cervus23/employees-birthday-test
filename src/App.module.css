@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  text-align: center;
+}
+
+.appHr {
+  margin-top: 80px;
+  width: 60%;
+}

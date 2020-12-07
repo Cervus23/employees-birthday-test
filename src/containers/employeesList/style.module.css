@@ -1,0 +1,43 @@
+.main {
+  width: 70%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.header {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.employeesContainer {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  flex-wrap: wrap;
+  border-right: 2px solid rgb(165, 165, 165);
+
+}
+
+.employees {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.letterGroup {
+  text-align: left;
+  margin-left: 30px;
+  margin-bottom: 30px;
+  
+}
+
+.letter {
+  margin-bottom: 10px;
+}
+
+.employee {
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+  margin-bottom: 5px;
+}
